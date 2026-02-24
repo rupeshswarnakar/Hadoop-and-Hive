@@ -147,5 +147,7 @@ GROUP BY customer_id;
 - Bucketing: Improves query performance for specific customer-centric queries, helping analyze data for individual customers in telecom operations.
 
 Conclusion:
-Partitioning and bucketing in Hive for telecommunication data improves query performance by optimizing data storage and retrieval. Partitioning by call_date, usage_date, and sms_date with region helps in faster regional and time-based queries, while bucketing by customer_id speeds up customer-centric queries, making it easier to identify trends and heavy data users.
+Partitioning and bucketing in Hive for telecommunication data improves query performance by optimizing data storage and retrieval.
+Partitioning by call_date, usage_date, and sms_date with region helps in faster regional and time-based queries.
+And bucketing by customer_id speeds up customer-centric queries, making it easier to identify trends and heavy data users.
 ```
