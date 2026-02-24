@@ -133,8 +133,8 @@ FROM sms_data
 WHERE region = 'North'
 GROUP BY customer_id;
 6. Advantages of Partitioning and Bucketing
-- **Partitioning**: Optimizes data retrieval for time-based and regional queries, reducing scan time for large datasets.
-- **Bucketing**: Improves query performance for specific customer-centric queries, helping analyze data for individual customers in telecom operations.
+- Partitioning: Optimizes data retrieval for time-based and regional queries, reducing scan time for large datasets.
+- Bucketing: Improves query performance for specific customer-centric queries, helping analyze data for individual customers in telecom operations.
 Conclusion
 Conclusion
 Partitioning and bucketing in Hive for telecommunication data improves query performance by optimizing data storage and retrieval. Partitioning by call_date, usage_date, and sms_date with region helps in faster regional and time-based queries, while bucketing by customer_id speeds up customer-centric queries, making it easier to identify trends and heavy data users.
