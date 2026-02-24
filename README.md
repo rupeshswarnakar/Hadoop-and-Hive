@@ -12,6 +12,7 @@ Given the large scale of the dataset (millions of records), querying the data fo
 - Optimize queries to retrieve data based on call date and region for reporting purposes.
 - Speed up queries to identify heavy data users.
 - Use partitioning and bucketing to manage the dataset efficiently in Hive, improving query performance and storage optimization.
+
 Sample Data
 Call Data Table (call_data)
 Columns:
@@ -27,6 +28,7 @@ Sample Data:
 3, 103, 5.7, East, 2023-08-03
 4, 104, 12.4, West, 2023-08-04
 5, 105, 25.0, North, 2023-08-05
+
 Data Usage Table (data_usage)
 Columns:
 - usage_id: INT
@@ -41,6 +43,7 @@ Sample Data:
 3, 103, 1.2, East, 2023-08-03
 4, 104, 5.5, West, 2023-08-04
 5, 105, 10.0, North, 2023-08-05
+
 SMS Data Table (sms_data)
 Columns:
 - sms_id: INT
@@ -63,9 +66,11 @@ Sample Data:
 1. Partitioning
 Partition the data by call_date and region. This helps reduce the amount of data scanned when querying for specific dates or regions.
 •	- Partition on: call_date, region
+
 2. Bucketing
 Use bucketing on customer_id for all tables (call_data, data_usage, sms_data). This allows for efficient queries targeting specific customers.
 •	- Bucket on: customer_id
+
 3. Create Table with Partitioning and Bucketing
 Hive Query to create the partitioned and bucketed table for call data, data usage, and SMS data:
 CREATE TABLE call_data (
@@ -100,6 +105,7 @@ CLUSTERED BY (customer_id) INTO 10 BUCKETS
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ','
 STORED AS ORC;
+
 4. Load Data into Partitioned and Bucketed Tables
 When loading data, specify the partition values:
 LOAD DATA INPATH '/path/to/call_data_2023-08-01_North.csv'
@@ -113,12 +119,14 @@ PARTITION (usage_date='2023-08-01', region='North');
 LOAD DATA INPATH '/path/to/sms_data_2023-08-01_North.csv'
 INTO TABLE sms_data
 PARTITION (sms_date='2023-08-01', region='North');
+
 5. Query Optimizations Using Partitioning and Bucketing
 a. Call Durations by Region and Date
 To query total call durations for a specific region and date:
 SELECT SUM(call_duration) AS total_duration
 FROM call_data
 WHERE call_date = '2023-08-01' AND region = 'North';
+
 b. Top Data Users by Region
 To find the top data users in a specific region:
 SELECT customer_id, SUM(data_used) AS total_data
@@ -126,16 +134,18 @@ FROM data_usage
 WHERE region = 'North'
 GROUP BY customer_id
 ORDER BY total_data DESC;
+
 c. SMS Usage Trends by Region
 To analyze SMS usage trends in a specific region:
 SELECT customer_id, SUM(sms_count) AS total_sms
 FROM sms_data
 WHERE region = 'North'
 GROUP BY customer_id;
+
 6. Advantages of Partitioning and Bucketing
 - Partitioning: Optimizes data retrieval for time-based and regional queries, reducing scan time for large datasets.
 - Bucketing: Improves query performance for specific customer-centric queries, helping analyze data for individual customers in telecom operations.
-Conclusion
-Conclusion
+
+Conclusion:
 Partitioning and bucketing in Hive for telecommunication data improves query performance by optimizing data storage and retrieval. Partitioning by call_date, usage_date, and sms_date with region helps in faster regional and time-based queries, while bucketing by customer_id speeds up customer-centric queries, making it easier to identify trends and heavy data users.
 ```
