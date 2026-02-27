@@ -1,4 +1,4 @@
-# Hadoop-and-Hive-Case-Study
+# Hive-Case-Study
 
 ## Business Use Case: Telecommunication Data Analytics with Hive Partitioning and Bucketing
 ```
